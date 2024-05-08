@@ -21,11 +21,10 @@ public class Party {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "party")
     private List<Hero> heroes = new ArrayList<>();
 
-    private Date timestamp;
+    private Date timestamp = new Date();
     private Integer morale;
 
 }
