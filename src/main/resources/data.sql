@@ -1,5 +1,5 @@
 
-INSERT INTO party (morale) VALUES (80);
+INSERT INTO party (morale,timestamp) VALUES (80, NOW());
 INSERT INTO hero (name, health, mana, party_id)
 VALUES ('Hero1', 100, 100, 1);
 INSERT INTO hero (name, health, mana, party_id)
