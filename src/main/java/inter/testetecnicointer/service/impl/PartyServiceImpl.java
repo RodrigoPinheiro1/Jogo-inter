@@ -12,7 +12,6 @@ import inter.testetecnicointer.repository.PartyRepository;
 import inter.testetecnicointer.service.PartyService;
 import inter.testetecnicointer.service.utils.LimitadorPontos;
 import inter.testetecnicointer.service.utils.ResultadoCombate;
-import inter.testetecnicointer.service.utils.ValidaQuantidadePlayers;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;

@@ -1,9 +1,8 @@
 package inter.testetecnicointer.service.utils;
 
 import inter.testetecnicointer.model.CombateResultado;
-import inter.testetecnicointer.model.Hero;
 import inter.testetecnicointer.model.TipoCombate;
-import org.junit.jupiter.api.BeforeEach;
+import inter.testetecnicointer.validations.ValidaPlayers;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -21,7 +20,7 @@ class ResultadoCombateTest {
     private LimitadorPontos limitadorPontos;
 
     @Mock
-    private ValidaQuantidadePlayers validaQuantidadePlayers;
+    private ValidaPlayers validaPlayers;
 
 
     @InjectMocks
@@ -40,7 +39,7 @@ class ResultadoCombateTest {
         resultadoCombate.combateResultado(HERO, combatType, combatResult);
 
 
-        verify(validaQuantidadePlayers).validar(PARTY);
+        verify(validaPlayers).validarNumeroMaximoJogadores(PARTY);
         verify(limitadorPontos).limitaPontosSomaHealth(HERO);
         assertEquals(TipoCombate.melee, HERO.getTipoCombate());
         assertEquals(CombateResultado.win, HERO.getCombateResultado());
@@ -57,7 +56,7 @@ class ResultadoCombateTest {
 
         resultadoCombate.combateResultado(HERO, combatType, combatResult);
 
-        verify(validaQuantidadePlayers).validar(PARTY);
+        verify(validaPlayers).validarNumeroMaximoJogadores(PARTY);
         verify(limitadorPontos).limitaPontosSubtracaoHealth(HERO);
         assertEquals(TipoCombate.melee, HERO.getTipoCombate());
         assertEquals(CombateResultado.lose, HERO.getCombateResultado());
@@ -72,7 +71,7 @@ class ResultadoCombateTest {
 
         resultadoCombate.combateResultado(HERO, combatType, combatResult);
 
-        verify(validaQuantidadePlayers).validar(PARTY);
+        verify(validaPlayers).validarNumeroMaximoJogadores(PARTY);
         verify(limitadorPontos).limitaPontosSomaMana(HERO);
         assertEquals(TipoCombate.spell, HERO.getTipoCombate());
         assertEquals(CombateResultado.win, HERO.getCombateResultado());
@@ -88,7 +87,7 @@ class ResultadoCombateTest {
 
         resultadoCombate.combateResultado(HERO, combatType, combatResult);
 
-        verify(validaQuantidadePlayers).validar(PARTY);
+        verify(validaPlayers).validarNumeroMaximoJogadores(PARTY);
         verify(limitadorPontos).limitaPontosSubtracaoMana(HERO);
         assertEquals(TipoCombate.spell, HERO.getTipoCombate());
         assertEquals(CombateResultado.lose, HERO.getCombateResultado());

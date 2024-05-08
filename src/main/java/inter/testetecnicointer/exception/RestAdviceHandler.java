@@ -24,6 +24,14 @@ public class RestAdviceHandler {
     }
 
 
+    @ExceptionHandler(AtributosZeradosExcetion.class)
+    @ResponseStatus(HttpStatus.GONE)
+    public String manaOuHealthZero() {
+
+        return "o herói não está em condições de combater no momento";
+    }
+
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public MessageGlobalException CamposInvalidos(MethodArgumentNotValidException exception) {
