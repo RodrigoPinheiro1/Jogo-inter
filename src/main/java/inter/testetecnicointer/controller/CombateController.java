@@ -2,6 +2,7 @@ package inter.testetecnicointer.controller;
 
 import inter.testetecnicointer.dto.PartyDTO;
 import inter.testetecnicointer.service.PartyService;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +26,8 @@ public class CombateController {
 
     @GetMapping("/combat")
     public ResponseEntity<PartyDTO> registraResultadosCombate(@RequestParam @NotNull Long heroId,
-                                                              @Pattern(regexp = "melee|spell") @RequestParam String combatType,
-                                                              @Pattern(regexp = "win|lose") @RequestParam String combatResult) throws ChangeSetPersister.NotFoundException {
+                                                              @Valid @Pattern(regexp = "melee|spell") @RequestParam String combatType,
+                                                              @Valid @Pattern(regexp = "win|lose") @RequestParam String combatResult) {
 
         PartyDTO partyDTO = partyService.combater(heroId, combatType, combatResult);
 

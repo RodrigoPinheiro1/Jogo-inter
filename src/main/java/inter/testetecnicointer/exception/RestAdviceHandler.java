@@ -6,12 +6,14 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.HandlerMethodValidationException;
 
-import java.util.Objects;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @RestControllerAdvice
 @Slf4j
-public class Handler {
+public class RestAdviceHandler {
 
 
     @ExceptionHandler(NumeroInvalidoException.class)
@@ -24,12 +26,21 @@ public class Handler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String CamposInvalidos(MethodArgumentNotValidException e) {
+    public MessageGlobalException CamposInvalidos(MethodArgumentNotValidException exception) {
+        var erros = exception.getFieldErrors();
 
-        return Objects.requireNonNull(e.getFieldError()).getDefaultMessage();
+        List<ErrorValidation> errorValidations = erros.stream().map(ErrorValidation::new).toList();
+
+        return new MessageGlobalException(LocalDateTime.now(),
+                HttpStatus.BAD_REQUEST.value(), "error fields", errorValidations);
     }
 
+    @ExceptionHandler(HandlerMethodValidationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String CamposInvalidos() {
 
+        return "só é permitido os tipos 'melee', 'spell', 'win' e 'lose' ";
+    }
 
 
     @ExceptionHandler(NumeroPlayersInvalidoException.class)
