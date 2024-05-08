@@ -1,5 +1,6 @@
 package inter.testetecnicointer.service.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import inter.testetecnicointer.dto.HeroDTO;
 import inter.testetecnicointer.dto.PartyDTO;
 import inter.testetecnicointer.exception.EntityNotFound;
@@ -11,7 +12,7 @@ import inter.testetecnicointer.repository.PartyRepository;
 import inter.testetecnicointer.service.PartyService;
 import inter.testetecnicointer.service.utils.LimitadorPontos;
 import inter.testetecnicointer.service.utils.ResultadoCombate;
-import inter.testetecnicointer.validation.ValidaQuantidadePlayers;
+import inter.testetecnicointer.service.utils.ValidaQuantidadePlayers;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -32,6 +33,8 @@ public class PartyServiceImpl implements PartyService {
 
     private final ModelMapper modelMapper;
 
+    private final ObjectMapper objectMapper;
+
 
     private final LimitadorPontos limitadorPontos;
 
@@ -47,23 +50,29 @@ public class PartyServiceImpl implements PartyService {
 
         partyRepository.findById(hero.getParty().getId()).orElseThrow(EntityNotFound::new);
 
-        hero.setId(heroId);
-        hero.setCombateStatus(CombateStatus.COMBATE);
-        heroiRepository.save(hero);
+        prepararHeroiParaCombate(hero, heroId);
 
         resultadoCombate.combateResultado(hero, combatType, combatResult);
 
-        ValidaQuantidadePlayers.validar(hero.getParty());
-
-        hero.setId(heroId);
-        hero.setCombateStatus(CombateStatus.DESCANSO);
-        heroiRepository.save(hero);
+        finalizarCombate(hero, heroId);
 
         HeroDTO heroDTO = modelMapper.map(hero, HeroDTO.class);
-
         return heroDTO.getParty();
-
     }
+
+
+    private void prepararHeroiParaCombate(Hero hero, Long id) {
+        hero.setId(id);
+        hero.setCombateStatus(CombateStatus.COMBATE);
+        heroiRepository.save(hero);
+    }
+
+    private void finalizarCombate(Hero hero, Long id) {
+        hero.setId(id);
+        hero.setCombateStatus(CombateStatus.DESCANSO);
+        heroiRepository.save(hero);
+    }
+
 
     @Override
     public Page<PartyDTO> situacaoParty(Pageable pageable) {
@@ -93,15 +102,7 @@ public class PartyServiceImpl implements PartyService {
         List<Party> parties = partyRepository.findAll();
 
 
-        parties.forEach(party -> {
-
-            Integer morale = party.getMorale();
-
-            int newMorale = Math.min(morale + 20, 1000);
-            party.setMorale(newMorale);
-
-
-        });
+        parties.forEach(limitadorPontos::somaIntervaloMorale);
 
         partyRepository.saveAll(parties);
 

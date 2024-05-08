@@ -1,11 +1,13 @@
-package inter.testetecnicointer.service.impl;
+package inter.testetecnicointer.service.utils;
 
+import inter.testetecnicointer.service.impl.PartyServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Service
+@Component
 @EnableScheduling
 @RequiredArgsConstructor
 public class RecoveryServiceImpl {

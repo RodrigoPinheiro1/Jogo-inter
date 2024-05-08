@@ -1,11 +1,20 @@
 package inter.testetecnicointer.service.utils;
 
 import inter.testetecnicointer.model.Hero;
+import inter.testetecnicointer.model.Party;
 import org.springframework.stereotype.Component;
 
 @Component
 public class LimitadorPontos {
 
+
+
+    public void somaIntervaloMorale(Party party) {
+        Integer morale = party.getMorale();
+
+        int newMorale = Math.min(morale + 20, 1000);
+        party.setMorale(newMorale);
+    }
 
     public void somaIntervaloHealthMana(Hero hero) {
 

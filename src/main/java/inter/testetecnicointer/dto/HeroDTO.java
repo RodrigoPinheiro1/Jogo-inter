@@ -3,13 +3,13 @@ package inter.testetecnicointer.dto;
 import inter.testetecnicointer.model.CombateResultado;
 import inter.testetecnicointer.model.CombateStatus;
 import inter.testetecnicointer.model.TipoCombate;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
+@Builder
 public class HeroDTO {
 
     private Long id;

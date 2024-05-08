@@ -13,11 +13,13 @@ public class ResultadoCombate {
 
     private final LimitadorPontos limitadorPontos;
 
+
+    private final ValidaQuantidadePlayers validaQuantidadePlayers;
+
     public void combateResultado(Hero hero, String combatType, String combatResult) {
 
 
         if (combatType.equals("melee")) {
-
             hero.setTipoCombate(TipoCombate.melee);
             if (combatResult.equals("win")) {
                 hero.setCombateResultado(CombateResultado.win);
@@ -38,8 +40,10 @@ public class ResultadoCombate {
                 limitadorPontos.limitaPontosSubtracaoMana(hero);
 
             }
-        }
 
+
+        }
+        validaQuantidadePlayers.validar(hero.getParty());
     }
 }
 
