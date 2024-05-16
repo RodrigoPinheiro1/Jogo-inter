@@ -59,12 +59,20 @@ public class RestAdviceHandler {
 
     }
 
-    @ExceptionHandler(EntityNotFound.class)
+    @ExceptionHandler(HeroNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String notFound() {
+    public String heroNotFound() {
 
-        return "Recurso nao existe";
+        return "heroi não existe";
     }
+
+    @ExceptionHandler(PartyNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String PartyNotFound() {
+
+        return "Partida não existe";
+    }
+
 
 
 }
