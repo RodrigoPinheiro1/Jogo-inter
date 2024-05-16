@@ -4,6 +4,7 @@ import inter.testetecnicointer.dto.HeroDTO;
 import inter.testetecnicointer.dto.PartyDTO;
 import inter.testetecnicointer.exception.HeroNotFoundException;
 import inter.testetecnicointer.exception.PartyNotFoundException;
+import inter.testetecnicointer.model.CombateStatus;
 import inter.testetecnicointer.model.Hero;
 import inter.testetecnicointer.model.Party;
 import inter.testetecnicointer.repository.HeroiRepository;
@@ -135,6 +136,7 @@ class PartyServiceImplTest {
 
         List<Hero> heroes = new ArrayList<>();
 
+        HERO.setCombateStatus(CombateStatus.COMBATE);
         heroes.add(HERO);
         heroes.add(HERO_DESCANSO);
 
@@ -160,11 +162,12 @@ class PartyServiceImplTest {
         parties.add(PARTY);
         parties.add(PARTY);
 
+        when(partyRepository.findAll()).thenReturn(parties);
+
 
         partyService.recoverMorale();
 
-        verify(limitadorPontos, times(1)).somaIntervaloMorale(PARTY);
-        verify(limitadorPontos, times(1)).somaIntervaloMorale(PARTY);
+        verify(limitadorPontos, times(2)).somaIntervaloMorale(PARTY);
 
         verify(partyRepository, times(1)).saveAll(parties);
 

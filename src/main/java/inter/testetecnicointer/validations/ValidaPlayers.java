@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ValidaPlayers {
-
     public void validarNumeroMaximoJogadores(Party partyDTO) {
 
         if (partyDTO.getHeroes().size() != 5) {
@@ -16,7 +15,6 @@ public class ValidaPlayers {
         }
 
     }
-
     public void validarManaHealthZerados(Hero hero) {
         if (hero.getMana() == 0 || hero.getHealth() == 0) {
 

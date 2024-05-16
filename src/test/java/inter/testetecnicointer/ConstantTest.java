@@ -4,7 +4,9 @@ import inter.testetecnicointer.dto.HeroDTO;
 import inter.testetecnicointer.dto.PartyDTO;
 import inter.testetecnicointer.model.*;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 public class ConstantTest {
 
@@ -15,6 +17,14 @@ public class ConstantTest {
                     .morale(80)
                     .timestamp(new Date())
                     .build();
+
+    public static final Party PARTY_5_Heroes =
+            Party.builder()
+                    .id(1L)
+                    .morale(80)
+                    .timestamp(new Date())
+                    .build();
+
 
     public static final PartyDTO PARTY_DTO =
             PartyDTO.builder()
