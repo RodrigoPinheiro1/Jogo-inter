@@ -11,7 +11,7 @@ import inter.testetecnicointer.repository.HeroiRepository;
 import inter.testetecnicointer.repository.PartyRepository;
 import inter.testetecnicointer.service.utils.LimitadorPontos;
 import inter.testetecnicointer.service.utils.ResultadoCombate;
-import inter.testetecnicointer.validations.ValidaPlayers;
+import inter.testetecnicointer.service.utils.ValidaPlayers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -23,7 +23,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 

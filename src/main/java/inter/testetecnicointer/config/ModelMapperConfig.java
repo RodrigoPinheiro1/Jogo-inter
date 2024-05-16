@@ -1,4 +1,4 @@
-package inter.testetecnicointer.Config;
+package inter.testetecnicointer.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

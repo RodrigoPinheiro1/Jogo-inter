@@ -3,7 +3,6 @@ package inter.testetecnicointer.service.utils;
 import inter.testetecnicointer.exception.AtributosZeradosExcetion;
 import inter.testetecnicointer.exception.NumeroPlayersInvalidoException;
 import inter.testetecnicointer.model.Hero;
-import inter.testetecnicointer.validations.ValidaPlayers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

@@ -2,7 +2,6 @@ package inter.testetecnicointer.service.utils;
 
 import inter.testetecnicointer.model.CombateResultado;
 import inter.testetecnicointer.model.TipoCombate;
-import inter.testetecnicointer.validations.ValidaPlayers;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

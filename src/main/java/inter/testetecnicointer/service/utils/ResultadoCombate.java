@@ -3,7 +3,6 @@ package inter.testetecnicointer.service.utils;
 import inter.testetecnicointer.model.CombateResultado;
 import inter.testetecnicointer.model.Hero;
 import inter.testetecnicointer.model.TipoCombate;
-import inter.testetecnicointer.validations.ValidaPlayers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

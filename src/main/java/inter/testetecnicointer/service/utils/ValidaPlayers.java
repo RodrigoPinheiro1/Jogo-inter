@@ -1,4 +1,4 @@
-package inter.testetecnicointer.validations;
+package inter.testetecnicointer.service.utils;
 
 import inter.testetecnicointer.exception.AtributosZeradosExcetion;
 import inter.testetecnicointer.exception.NumeroPlayersInvalidoException;
