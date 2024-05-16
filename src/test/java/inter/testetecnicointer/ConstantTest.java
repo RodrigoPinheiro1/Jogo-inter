@@ -28,6 +28,17 @@ public class ConstantTest {
             Hero.builder()
                     .id(1L)
                     .mana(100)
+                    .combateStatus(CombateStatus.COMBATE)
+                    .name("HERO")
+                    .party(PARTY)
+                    .health(100)
+                    .build();
+
+    public static final Hero HERO_DESCANSO =
+            Hero.builder()
+                    .id(2L)
+                    .mana(100)
+                    .combateStatus(CombateStatus.DESCANSO)
                     .name("HERO")
                     .party(PARTY)
                     .health(100)

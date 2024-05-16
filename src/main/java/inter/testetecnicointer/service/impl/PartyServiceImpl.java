@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import inter.testetecnicointer.dto.HeroDTO;
 import inter.testetecnicointer.dto.PartyDTO;
 import inter.testetecnicointer.exception.EntityNotFound;
+import inter.testetecnicointer.exception.HeroNotFoundException;
+import inter.testetecnicointer.exception.PartyNotFoundException;
 import inter.testetecnicointer.model.CombateStatus;
 import inter.testetecnicointer.model.Hero;
 import inter.testetecnicointer.model.Party;
@@ -45,9 +47,9 @@ public class PartyServiceImpl implements PartyService {
     public PartyDTO combater(Long heroId, String combatType, String combatResult) {
 
 
-        Hero hero = heroiRepository.findById(heroId).orElseThrow(EntityNotFound::new);
+        Hero hero = heroiRepository.findById(heroId).orElseThrow(HeroNotFoundException::new);
 
-        partyRepository.findById(hero.getParty().getId()).orElseThrow(EntityNotFound::new);
+        partyRepository.findById(hero.getParty().getId()).orElseThrow(PartyNotFoundException::new);
 
         prepararHeroiParaCombate(hero, heroId);
 
@@ -60,13 +62,13 @@ public class PartyServiceImpl implements PartyService {
     }
 
 
-    private void prepararHeroiParaCombate(Hero hero, Long id) {
+    public void prepararHeroiParaCombate(Hero hero, Long id) {
         hero.setId(id);
         hero.setCombateStatus(CombateStatus.COMBATE);
         heroiRepository.save(hero);
     }
 
-    private void finalizarCombate(Hero hero, Long id) {
+    public void finalizarCombate(Hero hero, Long id) {
         hero.setId(id);
         hero.setCombateStatus(CombateStatus.DESCANSO);
         heroiRepository.save(hero);
@@ -89,7 +91,6 @@ public class PartyServiceImpl implements PartyService {
             if (hero.getCombateStatus() == CombateStatus.DESCANSO) {
                 limitadorPontos.somaIntervaloHealthMana(hero);
             }
-
 
         });
         heroiRepository.saveAll(heroes);
